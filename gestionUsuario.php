@@ -38,7 +38,7 @@
 	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 		<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="#">Inicio</a>
+                <a class="navbar-brand" href="perfilAdmin.php">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
@@ -46,6 +46,7 @@
                        
                         <li class="nav-item"><a class="nav-link" href="gestionUsuario.php">Gestión usuario</a></li>
                         <li class="nav-item"><a class="nav-link" href="registraNuevoUsuario.php">Registrar Usuario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="consulta.php">Consulta</a></li>
                         <li class="nav-item"><a class="nav-link" href="exit.php">Salir</a></li>
                     </ul>
                 </div>
@@ -67,7 +68,7 @@
             <th scope='col'><input class='btn btn-danger' type='submit' name='btnDesbloquear' value='Desbloquear' /></th>
             <th scope='col'><input class='btn btn-danger' type='submit' name='btnDesbloquear' value='Cambiar rol' /></th>
             
-           <!-- <th scope='col'>Editar</th>-->
+            <th scope='col'>Ver perfil</th>
           
         </tr>
     
@@ -81,11 +82,11 @@
      }
      $sql = "SELECT *
      FROM usuarios
-     WHERE Usuario_email NOT LIKE '$Usuario_email'";
+     WHERE Usuario_perfil NOT LIKE 'admin'";
 
       $sqlNull ="SELECT *
       FROM usuarios
-      WHERE Usuario_email NOT LIKE '$Usuario_email'";
+      WHERE Usuario_perfil NOT LIKE 'admin'";
 
 $result = $conn->query($sql);
 $resultsNull = $conn->query($sqlNull);
@@ -94,7 +95,7 @@ $resultsNull = $conn->query($sqlNull);
                    
                     $paginacion = ceil($numeroFilas / $resultadoPorPaginas);
                     $primeraPagina = ($pagina - 1) * $resultadoPorPaginas;
-                    $sqlPaginacion = "SELECT * FROM usuarios  WHERE Usuario_email  NOT LIKE '$Usuario_email' LIMIT ". $primeraPagina . ',' . $resultadoPorPaginas;
+                    $sqlPaginacion = "SELECT * FROM usuarios  WHERE Usuario_perfil  NOT LIKE 'admin' LIMIT ". $primeraPagina . ',' . $resultadoPorPaginas;
                     $resultsPagina = $conn->query($sqlPaginacion);
                     if ($resultsPagina->num_rows > 0) {
                         while ($row = $resultsPagina->fetch_assoc()) {
@@ -123,7 +124,7 @@ $resultsNull = $conn->query($sqlNull);
                 <td><input type='checkbox' name='idEliminar[]' value='$Usuario_id' /></td>
                 <td><input type='checkbox' name='idModificar[]' value='$Usuario_id' /></td>
                 <td><input type='checkbox' name='idEditar[]' value='$Usuario_id' /></td>
-               
+                 <td>  <a href='modificarPerfilesAdmin.php?Usuario_id=".$Usuario_id."' name='idEditar' >Ver</a></td>
                
             </tr>";
         }
@@ -156,7 +157,7 @@ $resultsNull = $conn->query($sqlNull);
                     } else {
                         echo "0 results";
                     }
-                   // <td>  <a href='modificarPerfil.php?Usuario_id=".$Usuario_id."' name='idEditar' >Editar</a></td>
+                   
                     $conn->close();
                         ?>
    

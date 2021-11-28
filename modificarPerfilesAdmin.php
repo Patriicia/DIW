@@ -11,7 +11,7 @@
 
     $id=$_GET['Usuario_id'];
 
-    $sql = "SELECT Usuario_id, Usuario_nombre, Usuario_apellido1, Usuario_apellido2, Usuario_domicilio, Usuario_poblacion, Usuario_provincia, Usuario_nif, Usuario_numero_telefono, Usuario_perfil, Usuario_fotografia 
+    $sql = "SELECT Usuario_id, Usuario_nombre, Usuario_apellido1, Usuario_apellido2, Usuario_domicilio, Usuario_poblacion, Usuario_provincia, Usuario_nif, Usuario_numero_telefono, Usuario_perfil, Usuario_fotografia, Usuario_fecha_nacimiento 
             FROM usuarios
             WHERE Usuario_id LIKE '$id'";
     $result = $conn->query($sql);
@@ -29,6 +29,7 @@
             $Usuario_numero_telefono = $row['Usuario_numero_telefono'];
             $Usuario_perfil = $row['Usuario_perfil'];
             $Usuario_fotografia=$row['Usuario_fotografia'];
+            $Usuario_fecha_nacimiento = $row['Usuario_fecha_nacimiento'];
         }
     } else {
         echo "0 results";
@@ -76,94 +77,34 @@
             </div>
         </nav>
         <section class="ftco-section">
-		
-        <div class="container bootstrap snippet">
-   
-    <div class="row">
-  		<div class="col-sm-3"><!--left col-->
-          <img src="images/<?=$Usuario_fotografia?>" class='imgRedonda'>
-        
-
-      <div class="text-center">
-      
-      <form enctype="multipart/form-data" action="subidaFoto.php" method="POST">
-      
-            <input name="uploadedfile" type="file" />
-            <input type="submit" value="Subir archivo" />
-        </form>
-      </div></hr><br>
-
-          
-        </div><!--/col-3-->
-    	<div class="col-sm-9">
+	
             
 
               
           <div class="tab-content">
             <div class="tab-pane active" id="home">
-                <hr>
-                  <form class="form" action="modificarRoot.php" method="post" id="registrationForm">
-                 
-                      
-                      <div class="form-group">
-                          <div class="row">
-                          <div class="col">
-                              <label for="first_name"><h5>Id</h5></label>
-                              <input type="text" class="form-control" name="Usuario_id"  value='<?php echo $Usuario_id ?>' readonly>
-                          </div>
-                          <div class="col">
-                              <label for="first_name"><h5>Nombre</h5></label>
-                              <input type="text" class="form-control" name="Usuario_nombre"  value='<?php echo $Usuario_nombre ?>'>
-                          </div>
-                          <div class="col">
-                            <label for="last_name"><h5>Primer apellido</h5></label>
-                            <input type="text" class="form-control" name="Usuario_apellido1"  value='<?php echo $Usuario_apellido1 ?>'>
-                          </div>
-                          <div class="col">
-                              <label for="phone"><h5>Segundo apellido</h5></label>
-                              <input type="text" class="form-control" name="Usuario_apellido2"  value='<?php echo $Usuario_apellido2 ?>'>
-                          </div>
-</div>
-                      </div>
-          
-                      <div class="form-group">
-                          <div class="row">
-                          <div class="col-xs-6">
-                             <label for="mobile"><h5>Domicilio</h5></label>
-                             <input type="text" class="form-control" name="Usuario_domicilio" value='<?php echo $Usuario_domicilio ?>'>
-                          </div>
-                          <div class="col">
-                            <label for="last_name"><h5>Población</h5></label>
-                            <input type="text" class="form-control" name="Usuario_poblacion" value='<?php echo $Usuario_poblacion ?>'>
-                          </div>
-                          <div class="col">
-                              <label for="phone"><h5>Provincia</h5></label>
-                              <input type="text" class="form-control" name="Usuario_provincia" value='<?php echo $Usuario_provincia ?>'>
-                          </div>
-</div>
-                      <div class="form-group">
-                      <div class="row">
-                          <div class="col">
-                              <label for="email"><h5>NIF</h5></label>
-                              <input type="text" class="form-control" name="Usuario_nif" value='<?php echo $Usuario_nif ?>'>
-                          </div>
-                          <div class="col">
-                              <label for="email"><h5>Móvil</h5></label>
-                              <input type="text" class="form-control" name="Usuario_numero_telefono" value='<?php echo $Usuario_numero_telefono ?>'>
-                          </div>
-                      </div>
-                      
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br>
-                              	<input  class="btn btn-lg btn-success" type="submit" value="Guardar">
-                                  <input  class="btn btn-lg btn-success" type="reset" value="Borrar">
-                               
-                            </div>
-                      </div>
-              	</form>
+                
+                <div class="w3-content w3-black">
+          <div class="w3-card-4 rounded"style="width: 30%; margin:auto; background-color:white; color:black; ">
+            
+            <div class="p-4 ">
+            <div> <b>ID:</b> <?=$Usuario_id?></div>
+            <div><img src="images/<?=$Usuario_fotografia?>" style="float:right;" class="imgRedonda"></div>
+            <div> <b>Nombre</b> <?=$Usuario_nombre?></div>
+            <div> <b>Apellidos</b> <?=$Usuario_apellido1?><?=$Usuario_apellido2?></div>
+            <div> <b>Nif:</b> <?=$Usuario_nif?></div>
+            <div> <b>Provincia:</b> <?=$Usuario_provincia?></div>
+            <div> <b>Población:</b> <?=$Usuario_poblacion?></div>
+            <div> <b>Fecha de nacimiento:</b> <?=$Usuario_fecha_nacimiento?></div>
+            <div> <b>Número de teléfono:</b> <?=$Usuario_numero_telefono?></div> 
+            </div>
+            
+           
+         
+        </div>
+      </div>
               
-              <hr>
+        
               
              </div><!--/tab-pane-->
             
@@ -171,7 +112,7 @@
              
           </div><!--/tab-content-->
 
-        </div><!--/col-9-->
+       
     </div><!--/row-->
     
 	</section>
